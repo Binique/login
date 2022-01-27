@@ -6,7 +6,7 @@ class InputWidget extends StatelessWidget {
   final controllerField;
 
   InputWidget(this.labelText,this.chooseIcon,this.controllerField);
-
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,6 +19,7 @@ class InputWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             child: Form(
+              key: _formKey,
                 child: TextFormField(
                   style: TextStyle(color: Colors.white),
                   controller: controllerField,

@@ -18,10 +18,11 @@ class _PasswordState extends State<Password> {
   recuperer() {
     String username = nom.text;
     String motdepasse = mdp.text;
-    String resultat = username + motdepasse;
+    String resultat = username + '.' + motdepasse;
 
     print(resultat);
   }
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -85,7 +86,9 @@ class _PasswordState extends State<Password> {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(),
                         onPressed: (){
-                          recuperer();
+                          if (_formKey.currentState!.validate()) {
+                            recuperer();
+                          }
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => const Home()),

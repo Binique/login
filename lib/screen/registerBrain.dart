@@ -6,6 +6,7 @@ import 'loginBrain.dart';
 final TextEditingController nom = TextEditingController();
 final TextEditingController mdp = TextEditingController();
 final TextEditingController mail = TextEditingController();
+final TextEditingController confmdp = TextEditingController();
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -19,10 +20,12 @@ class _RegisterState extends State<Register> {
     String username = nom.text;
     String motdepasse = mdp.text;
     String email = mail.text;
-    String resultat = username + motdepasse + email;
+    String confmotdepasse = confmdp.text;
+    String resultat = username + '.' + motdepasse + '.' + email + '.' + confmotdepasse;
 
     print(resultat);
   }
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -63,7 +66,7 @@ class _RegisterState extends State<Register> {
                   InputWidget('Email',Icons.mail,mail),
                   InputWidget('Nom utilisateur',Icons.supervised_user_circle,nom),
                   InputWidget('Mot de passe',Icons.password,mdp),
-                  InputWidget('Confirmez votre mot de passe',Icons.password,mdp),
+                  InputWidget('Confirmez votre mot de passe',Icons.password,confmdp),
                   SizedBox(
                     height: 20,
                   ),
@@ -73,7 +76,9 @@ class _RegisterState extends State<Register> {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(),
                         onPressed: (){
-                          recuperer();
+                          if (_formKey.currentState!.validate()) {
+                            recuperer();
+                          }
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => const Home()),
