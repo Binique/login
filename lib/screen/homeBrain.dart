@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../component/background.dart';
 
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -9,6 +10,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
@@ -22,7 +25,7 @@ class _HomeState extends State<Home> {
                 height: 150,
                 child: Center(
                   child: Text(
-                    'Icenberg',
+                    'Logo',
                     style: TextStyle(
                       fontSize: 60,
                       fontWeight: FontWeight.bold,
@@ -34,10 +37,10 @@ class _HomeState extends State<Home> {
               Container(
                 height: 150,
                 child: Center(
-                  child: Text(
-                    'Bonjour',
+                  child: Text('Jean-Pierre'
+                     ,
                     style: TextStyle(
-                      fontSize: 60,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),

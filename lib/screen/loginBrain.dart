@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import '../component/background.dart';
 import '../component/InputWidget.dart';
 
+final TextEditingController nom = TextEditingController();
+final TextEditingController mdp = TextEditingController();
+
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -13,6 +16,14 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  recuperer() {
+    String username = nom.text;
+    String motdepasse = mdp.text;
+    String resultat = username + motdepasse;
+
+    print(resultat);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -50,8 +61,9 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ),
-                 InputWidget('Nom utilisateur',Icons.supervised_user_circle),
-                  InputWidget('Mot de passe',Icons.password),
+                  InputWidget(
+                      'Nom utilisateur', Icons.supervised_user_circle, nom),
+                  InputWidget('Mot de passe', Icons.password, mdp),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -59,11 +71,11 @@ class _LoginState extends State<Login> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const Password()),
+                              MaterialPageRoute(
+                                  builder: (context) => const Password()),
                             );
                           },
-                          child: Text("Mot de passe oublié ?")
-                      ),
+                          child: Text("Mot de passe oublié ?")),
                     ],
                   ),
                   SizedBox(
@@ -74,14 +86,15 @@ class _LoginState extends State<Login> {
                     height: 40,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(),
-                        onPressed: (){
+                        onPressed: () {
+                          recuperer();
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const Home()),
+                            MaterialPageRoute(
+                                builder: (context) => const Home()),
                           );
                         },
-                        child: Text('Connexion')
-                    ),
+                        child: Text('Connexion')),
                   ),
                   SizedBox(
                     height: 10,
@@ -89,14 +102,15 @@ class _LoginState extends State<Login> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextButton(onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const Register()),
-                        );
-                      },
-                          child: Text("S'inscrire ?")
-                      ),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Register()),
+                            );
+                          },
+                          child: Text("S'inscrire ?")),
                     ],
                   ),
                 ],

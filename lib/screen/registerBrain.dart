@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import '../component/background.dart';
 import '../component/InputWidget.dart';
 import 'loginBrain.dart';
+final TextEditingController nom = TextEditingController();
+final TextEditingController mdp = TextEditingController();
+final TextEditingController mail = TextEditingController();
+
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
 
@@ -11,6 +15,14 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  recuperer() {
+    String username = nom.text;
+    String motdepasse = mdp.text;
+    String email = mail.text;
+    String resultat = username + motdepasse + email;
+
+    print(resultat);
+  }
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -48,10 +60,10 @@ class _RegisterState extends State<Register> {
                       ),
                     ),
                   ),
-                  InputWidget('Email',Icons.mail),
-                  InputWidget('Nom utilisateur',Icons.supervised_user_circle),
-                  InputWidget('Mot de passe',Icons.password),
-                  InputWidget('Confirmez votre mot de passe',Icons.password),
+                  InputWidget('Email',Icons.mail,mail),
+                  InputWidget('Nom utilisateur',Icons.supervised_user_circle,nom),
+                  InputWidget('Mot de passe',Icons.password,mdp),
+                  InputWidget('Confirmez votre mot de passe',Icons.password,mdp),
                   SizedBox(
                     height: 20,
                   ),
@@ -61,6 +73,7 @@ class _RegisterState extends State<Register> {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(),
                         onPressed: (){
+                          recuperer();
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => const Home()),

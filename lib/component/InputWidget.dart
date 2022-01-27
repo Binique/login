@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class InputWidget extends StatelessWidget {
-  final myController = TextEditingController();
   late String labelText;
   final IconData chooseIcon;
+  final controllerField;
 
-  InputWidget(this.labelText,this.chooseIcon);
+  InputWidget(this.labelText,this.chooseIcon,this.controllerField);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,8 @@ class InputWidget extends StatelessWidget {
             ),
             child: Form(
                 child: TextFormField(
-                  controller: myController,
+                  style: TextStyle(color: Colors.white),
+                  controller: controllerField,
                   decoration: InputDecoration(
                     labelStyle: TextStyle(color: Colors.white),
                     labelText: labelText,

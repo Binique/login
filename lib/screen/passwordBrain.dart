@@ -4,6 +4,9 @@ import 'package:connexion/screen/registerBrain.dart';
 import 'package:flutter/material.dart';
 import '../component/background.dart';
 import '../component/InputWidget.dart';
+final TextEditingController nom = TextEditingController();
+final TextEditingController mdp = TextEditingController();
+
 class Password extends StatefulWidget {
   const Password({Key? key}) : super(key: key);
 
@@ -12,6 +15,13 @@ class Password extends StatefulWidget {
 }
 
 class _PasswordState extends State<Password> {
+  recuperer() {
+    String username = nom.text;
+    String motdepasse = mdp.text;
+    String resultat = username + motdepasse;
+
+    print(resultat);
+  }
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -50,8 +60,8 @@ class _PasswordState extends State<Password> {
                       ),
                     ),
                   ),
-                  InputWidget('Email',Icons.mail),
-                  InputWidget('Nouveau mot de passe',Icons.password),
+                  InputWidget('Email',Icons.mail,nom),
+                  InputWidget('Nouveau mot de passe',Icons.password,mdp),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -75,6 +85,7 @@ class _PasswordState extends State<Password> {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(),
                         onPressed: (){
+                          recuperer();
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => const Home()),
