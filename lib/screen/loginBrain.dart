@@ -4,6 +4,8 @@ import 'package:connexion/screen/registerBrain.dart';
 import 'package:flutter/material.dart';
 import '../component/background.dart';
 import '../component/InputWidget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+FirebaseAuth auth = FirebaseAuth.instance;
 
 final TextEditingController nom = TextEditingController();
 final TextEditingController mdp = TextEditingController();
@@ -24,6 +26,25 @@ class _LoginState extends State<Login> {
     print(resultat);
   }
   final _formKey = GlobalKey<FormState>();
+signin() async {
+  try {
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: nom.text,
+        password: mdp.text
+    );
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => const Home()),
+    );
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'user-not-found') {
+      print('No user found for that email.');
+    } else if (e.code == 'wrong-password') {
+      print('Wrong password provided for that user.');
+    }
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -88,13 +109,8 @@ class _LoginState extends State<Login> {
                         style: ElevatedButton.styleFrom(),
                         onPressed: () {
                      if (_formKey.currentState!.validate()) {
-                         recuperer();
+                         signin();
                          }
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Home()),
-                          );
                         },
                         child: Text('Connexion')),
                   ),
